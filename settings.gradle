@@ -1,4 +1,0 @@
-rootProject.name = 'misoinfo'
-include 'core'
-include 'wellb-api'
-
