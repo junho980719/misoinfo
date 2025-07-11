@@ -11,7 +11,7 @@ import java.util.Map;
 @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping
+    @GetMapping("/get")
     public ApiResult<Map<String, Object>> test() {
         return ApiResult.ok(Map.of("key1", "value1", "key2", "value2", "key3", "value3", "key4", "value4", "key5", "value5"));
     }

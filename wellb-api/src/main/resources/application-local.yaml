@@ -2,33 +2,35 @@ spring:
   application:
     name: wellb-api
 
-  # H2 \uC778\uBA54\uBAA8\uB9AC \uB370\uC774\uD130\uBCA0\uC774\uC2A4 \uC124\uC815
+  # --- 데이터소스 및 JPA 설정 (기존 내용 유지) ---
   datasource:
-    url: jdbc:h2:mem:testdb  # 'testdb'\uB77C\uB294 \uC774\uB984\uC758 \uC778\uBA54\uBAA8\uB9AC DB\uB97C \uC0AC\uC6A9\uD569\uB2C8\uB2E4.
+    url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
-    username: sa             # H2 \uAE30\uBCF8 \uC0AC\uC6A9\uC790 \uC774\uB984
-    password:                # H2 \uAE30\uBCF8 \uBE44\uBC00\uBC88\uD638\uB294 \uBE44\uC6CC\uB461\uB2C8\uB2E4.
+    username: sa
+    password:
 
-  # JPA \uBC0F Hibernate \uC124\uC815
   jpa:
-    # \uB370\uC774\uD130\uBCA0\uC774\uC2A4 \uC2A4\uD0A4\uB9C8 \uC790\uB3D9 \uC0DD\uC131 \uC804\uB7B5
-    # create-drop: \uD14C\uC2A4\uD2B8 \uC2DC\uC791 \uC2DC \uC2A4\uD0A4\uB9C8\uB97C \uC0DD\uC131\uD558\uACE0, \uC885\uB8CC \uC2DC \uC0AD\uC81C\uD569\uB2C8\uB2E4. \uD14C\uC2A4\uD2B8 \uD658\uACBD\uC5D0 \uAC00\uC7A5 \uC774\uC0C1\uC801\uC785\uB2C8\uB2E4.
     hibernate:
       ddl-auto: create-drop
-    # \uC2E4\uD589\uB418\uB294 SQL \uCFFC\uB9AC\uB97C \uB85C\uADF8\uC5D0 \uD45C\uC2DC\uD558\uC5EC \uB514\uBC84\uAE45\uC744 \uB3D5\uC2B5\uB2C8\uB2E4.
     show-sql: true
     properties:
       hibernate:
-        # \uB85C\uADF8\uC5D0 \uD45C\uC2DC\uB418\uB294 SQL\uC744 \uBCF4\uAE30 \uC88B\uAC8C \uC815\uB82C\uD569\uB2C8\uB2E4.
         format_sql: true
-        # H2 \uB370\uC774\uD130\uBCA0\uC774\uC2A4 \uBC29\uC5B8(Dialect)\uC744 \uBA85\uC2DC\uC801\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.
-        # Spring Boot 3.x \uC774\uC0C1\uC5D0\uC11C\uB294 \uB300\uBD80\uBD84 \uC790\uB3D9 \uAC10\uC9C0\uB418\uC9C0\uB9CC, \uBA85\uC2DC\uD558\uB294 \uAC83\uC774 \uB354 \uC548\uC804\uD569\uB2C8\uB2E4.
         database-platform: org.hibernate.dialect.H2Dialect
 
-  # H2 \uB370\uC774\uD130\uBCA0\uC774\uC2A4 \uC6F9 \uCF58\uC194 \uC124\uC815
   h2:
     console:
-      enabled: true          # \uC6F9 \uBE0C\uB77C\uC6B0\uC800\uB97C \uD1B5\uD574 H2 DB\uC5D0 \uC811\uADFC\uD560 \uC218 \uC788\uB294 \uCF58\uC194\uC744 \uD65C\uC131\uD654\uD569\uB2C8\uB2E4.
-      path: /h2-console      # \uCF58\uC194\uC5D0 \uC811\uADFC\uD560 URL \uACBD\uB85C\uC785\uB2C8\uB2E4. (\uC608: http://localhost:8080/h2-console)
+      enabled: true
+      path: /h2-console
       settings:
-        web-allow-others: false # \uBCF4\uC548\uC744 \uC704\uD574 \uC678\uBD80\uC5D0\uC11C\uC758 \uCF58\uC194 \uC811\uADFC\uC744 \uB9C9\uC2B5\uB2C8\uB2E4.
+        web-allow-others: false
+
+logging:
+  level:
+    # 프로젝트의 기본 패키지에 대해 DEBUG 레벨로 설정하여 상세한 로그를 확인합니다.
+    # 서비스나 컨트롤러에서 log.debug("...")로 남긴 로그가 모두 출력됩니다.
+    kr.co.misoinfo: DEBUG
+
+    # Spring 프레임워크 자체의 로그는 너무 많을 수 있으므로 INFO 레벨로 유지합니다.
+    org.springframework.web: INFO
+    org.hibernate: INFO # JPA의 show-sql과 별개로 Hibernate 내부 동작 로그

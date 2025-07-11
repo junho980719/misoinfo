@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
+        "kr.co.misoinfo.wellb.api",
         "kr.co.misoinfo.core",
 })
 public class WellbApiApplication {
